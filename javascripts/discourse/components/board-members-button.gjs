@@ -126,7 +126,7 @@ export default class BoardMembersButton extends Component {
 
     event.preventDefault();
     groupCache.delete(this.groupName);
-    this.router.transitionTo("group.manage.members", this.groupName);
+    this.router.transitionTo("group", this.groupName);
   }
 
   <template>
