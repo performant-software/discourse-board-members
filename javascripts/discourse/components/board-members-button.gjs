@@ -76,7 +76,7 @@ export default class BoardMembersButton extends Component {
   }
 
   get manageUrl() {
-    return `/g/${this.groupName}/manage/members`;
+    return `/g/${this.groupName}`;
   }
 
   @action
