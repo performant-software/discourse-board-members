@@ -1,0 +1,20 @@
+group_name_prefix:
+  type: string
+  default: "board-"
+
+group_name_overrides:
+  type: list
+  list_type: compact
+  default: ""
+
+show_member_count:
+  type: bool
+  default: true
+
+show_for_staff:
+  type: bool
+  default: true
+
+plugin_outlet:
+  type: string
+  default: "discovery-list-container-top"

@@ -1,0 +1,23 @@
+.board-members {
+  &:not(:empty) {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.5em;
+  }
+
+  &__button {
+    .d-icon {
+      margin-right: 0.45em;
+    }
+  }
+}
+
+.mobile-view .board-members:not(:empty) {
+  justify-content: stretch;
+  margin: 0 0.5em 0.5em;
+
+  .board-members__button {
+    width: 100%;
+    justify-content: center;
+  }
+}
