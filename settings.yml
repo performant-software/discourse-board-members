@@ -17,4 +17,4 @@ show_for_staff:
 
 plugin_outlet:
   type: string
-  default: "discovery-list-container-top"
+  default: "auto"

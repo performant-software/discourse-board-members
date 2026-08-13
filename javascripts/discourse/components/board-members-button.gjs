@@ -9,6 +9,7 @@ import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import { isFkbProActive, isNavPlacement } from "../lib/fkb-pro-support";
 
 const CACHE_TTL_MS = 60_000;
 const groupCache = new Map();
@@ -46,6 +47,21 @@ export default class BoardMembersButton extends Component {
     } catch {
       return null;
     }
+  }
+
+  get wrapperClass() {
+    const owner = getOwner(this);
+    const classes = ["board-members"];
+
+    if (isFkbProActive(owner)) {
+      classes.push("board-members--fkb");
+    }
+
+    if (isNavPlacement(owner)) {
+      classes.push("board-members--nav");
+    }
+
+    return classes.join(" ");
   }
 
   get groupName() {
@@ -132,7 +148,7 @@ export default class BoardMembersButton extends Component {
   <template>
     {{#if this.groupName}}
       <div
-        class="board-members"
+        class={{this.wrapperClass}}
         {{didInsert this.loadGroup}}
         {{didUpdate this.loadGroup this.groupName}}
       >

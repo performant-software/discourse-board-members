@@ -6,4 +6,4 @@ en:
     description: "Adds a Manage members button to private category pages, linking to the members page of the group that controls access to that category. Visible only to owners of that group."
     settings:
       group_name_prefix: "Text placed in front of the category slug to work out the group name. A category with the slug <code>design-team</code> and a prefix of <code>board-</code> looks for the group <code>board-design-team</code>. Leave blank to use the slug on its own."
-      plugin_outlet: "Where the button appears. Change this only if the button does not show up in the right place on your version of Discourse."
+      plugin_outlet: "Where the button appears. Leave this as <code>auto</code> to place it above the topic list, or in the category navigation column when the FKB Pro theme is active. Set a plugin outlet name to override the placement, for example <code>discovery-list-container-top</code> or <code>discovery-navigation-bar-above</code>."
