@@ -9,7 +9,7 @@ import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { ajax } from "discourse/lib/ajax";
 import icon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
-import { isFkbProActive, isNavPlacement } from "../lib/fkb-pro-support";
+import { isControlsPlacement, isFkbProActive } from "../lib/fkb-pro-support";
 
 const CACHE_TTL_MS = 60_000;
 const groupCache = new Map();
@@ -57,8 +57,8 @@ export default class BoardMembersButton extends Component {
       classes.push("board-members--fkb");
     }
 
-    if (isNavPlacement(owner)) {
-      classes.push("board-members--nav");
+    if (isControlsPlacement(owner)) {
+      classes.push("board-members--controls");
     }
 
     return classes.join(" ");

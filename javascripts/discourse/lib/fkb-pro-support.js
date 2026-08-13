@@ -1,7 +1,8 @@
 const FKB_PRO_REGISTRATIONS = ["component:fkb-panel", "service:fkb-cache"];
 
 export const DEFAULT_OUTLET = "discovery-list-container-top";
-export const NAV_OUTLET = "discovery-navigation-bar-above";
+
+export const CONTROLS_OUTLET = "before-create-topic-button";
 
 const detectionCache = new WeakMap();
 
@@ -33,12 +34,9 @@ export function resolveOutlet(owner) {
     return configured;
   }
 
-  return isFkbProActive(owner) ? NAV_OUTLET : DEFAULT_OUTLET;
+  return isFkbProActive(owner) ? CONTROLS_OUTLET : DEFAULT_OUTLET;
 }
 
-// True when the button ends up in the navigation column rather than above the
-// topic list, either because FKB Pro is active or because the outlet was set by
-// hand. The two placements need different styling.
-export function isNavPlacement(owner) {
-  return resolveOutlet(owner) === NAV_OUTLET;
+export function isControlsPlacement(owner) {
+  return resolveOutlet(owner) === CONTROLS_OUTLET;
 }

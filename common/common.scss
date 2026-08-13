@@ -5,6 +5,10 @@
     margin-bottom: 0.5em;
   }
 
+  &:empty {
+    display: none;
+  }
+
   &__button {
     .d-icon {
       margin-right: 0.45em;
@@ -12,7 +16,7 @@
   }
 }
 
-.mobile-view .board-members:not(.board-members--nav):not(:empty) {
+.mobile-view .board-members:not(.board-members--controls):not(:empty) {
   justify-content: stretch;
   margin: 0 0.5em 0.5em;
 
@@ -22,22 +26,54 @@
   }
 }
 
-.board-members--nav {
+.board-members--controls {
   &:not(:empty) {
-    justify-content: stretch;
-    margin: 0 0 var(--nav-space, 1em);
+    margin: 0;
+    align-self: stretch;
   }
 
   .board-members__button {
     width: 100%;
+    height: 100%;
     justify-content: center;
   }
 }
 
-.board-members--fkb.board-members--nav {
+.navigation-controls:has(> .board-members--controls) {
+  > .board-members--controls,
+  > #create-topic,
+  > *:has(#create-topic) {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  #create-topic {
+    width: 100%;
+  }
+}
+
+.mobile-view .navigation-controls:has(> .board-members--controls) {
+  > .board-members--controls,
+  > #create-topic,
+  > *:has(#create-topic) {
+    flex: 0 0 auto;
+  }
+
+  #create-topic {
+    width: auto;
+  }
+}
+
+.mobile-view .board-members--fkb.board-members--controls {
   .board-members__button {
-    height: 45px;
-    border-radius: var(--d-button-border-radius);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    width: auto;
+
+    .d-button-label {
+      display: none;
+    }
+
+    .d-icon {
+      margin-right: 0;
+    }
   }
 }
