@@ -7,8 +7,10 @@ import { service } from "@ember/service";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import didUpdate from "@ember/render-modifiers/modifiers/did-update";
 import { ajax } from "discourse/lib/ajax";
+import DiscourseURL from "discourse/lib/url";
 import icon from "discourse/helpers/d-icon";
 import { i18n } from "discourse-i18n";
+import { and } from "truth-helpers";
 import { isControlsPlacement, isFkbProActive } from "../lib/fkb-pro-support";
 
 const CACHE_TTL_MS = 60_000;
@@ -32,7 +34,6 @@ function writeCache(name, group) {
 
 export default class BoardMembersButton extends Component {
   @service currentUser;
-  @service router;
 
   @tracked group = null;
 
@@ -84,15 +85,18 @@ export default class BoardMembersButton extends Component {
   }
 
   get label() {
-    const count = this.group?.user_count;
-    if (typeof count === "number") {
-      return i18n(themePrefix("manage_members_with_count"), { count });
-    }
     return i18n(themePrefix("manage_members"));
   }
 
   get manageUrl() {
-    return `/g/${this.groupName}`;
+    const template = (settings.manage_url || "").trim();
+    if (!template) {
+      return null;
+    }
+
+    return template
+      .replaceAll("{group}", this.groupName)
+      .replaceAll("{slug}", this.category?.slug ?? "");
   }
 
   @action
@@ -142,7 +146,7 @@ export default class BoardMembersButton extends Component {
 
     event.preventDefault();
     groupCache.delete(this.groupName);
-    this.router.transitionTo("group", this.groupName);
+    DiscourseURL.routeTo(this.manageUrl);
   }
 
   <template>
@@ -152,7 +156,7 @@ export default class BoardMembersButton extends Component {
         {{didInsert this.loadGroup}}
         {{didUpdate this.loadGroup this.groupName}}
       >
-        {{#if this.canManage}}
+        {{#if (and this.canManage this.manageUrl)}}
           <a
             class="btn btn-default board-members__button"
             href={{this.manageUrl}}
